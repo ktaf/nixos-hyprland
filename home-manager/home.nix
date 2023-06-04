@@ -22,9 +22,7 @@
 		fluxcd
 		flutter
 		fwupd
-		jdk
 		jq
-		jre8
 		kind
 		krew
 		libdigidocpp

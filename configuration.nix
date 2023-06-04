@@ -154,6 +154,28 @@
      playerctl                                 #play,pause..
      pamixer                                   #mixer
      brightnessctl                             #Brightness control
+     bluez
+     blueman
+     gnome.file-roller
+     grim
+     htop
+     jetbrains-mono
+     libva
+     libsForQt5.qt5ct
+     libsForQt5.sddm
+     linuxheaders
+     lxappearance
+     networkmanagerapplet
+     noto-fonts-emoji
+     nvidia-vaapi-driver
+     polkit_gnome
+     slurp
+     swappy
+     swaycons
+     swww
+     wofi
+     xfce.xfce4-settings
+     xdg-desktop-portal-hyprland
      ####GTK Customization####
      nordic
      papirus-icon-theme

@@ -32,7 +32,7 @@
               {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.kourosh = import ./home.nix;
+              home-manager.users.kourosh = import ./home-manager/home.nix;
               }
 ];
             };

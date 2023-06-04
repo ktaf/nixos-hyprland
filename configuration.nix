@@ -297,7 +297,6 @@ programs.bash.shellAliases = {
     ];
     # Enable ZSH
     shell = pkgs.zsh;
-    programs.zsh.enable = true;
   };
 
 
@@ -306,6 +305,9 @@ services.tlp.enable = true;
 
 #upower dbus
 services.upower.enable = true;
+
+# Enable ZSH
+programs.zsh.enable = true;
 
 #starship
 programs.starship.enable = true;

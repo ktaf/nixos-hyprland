@@ -19,7 +19,6 @@
 		android-tools
 		anydesk
 		bat
-		etcher
 		fluxcd
 		flutter
 		fwupd

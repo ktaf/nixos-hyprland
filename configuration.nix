@@ -169,7 +169,7 @@
      pulsemixer
      linux-firmware
      sshpass
-     pkgs.rust-bin.stable.latest.default
+     rustc
      imagemagick
      flameshot
      bluez
@@ -177,6 +177,7 @@
      gnome.file-roller
      grim
      htop
+     intel-media-driver
      jetbrains-mono
      libva
      libsForQt5.qt5ct
@@ -186,7 +187,6 @@
      networkmanagerapplet
      noto-fonts-emoji
      nvidia-vaapi-driver
-     nvidia-offload
      libva-utils
      glxinfo
      polkit_gnome

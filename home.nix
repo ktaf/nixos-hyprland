@@ -22,7 +22,7 @@
     vscode
     slack
     tdesktop
-    
+
 		];
 
 
@@ -53,7 +53,7 @@
 				protocol.keybase.allow = "always";
 				pull.rebase = "false";
 				};
-}
+};
 
   #Gtk 
     gtk = {

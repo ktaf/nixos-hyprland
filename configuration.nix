@@ -295,7 +295,7 @@ programs.bash.shellAliases = {
      curl
      #########################
     ];
-    # Enable ZSH
+    # SHELL ZSH
     shell = pkgs.zsh;
   };
 

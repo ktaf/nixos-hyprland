@@ -1,38 +1,8 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { config, pkgs, lib, inputs, ... }:
 {
   # Include the results of the hardware scan.
     imports = [ ./hardware-configuration.nix 
     ./vm.nix];
-
-
-programs.bash.shellAliases = {
-  switch = "sudo nixos-rebuild switch --flake .#kourosh";
-  switchu = "sudo nixos-rebuild switch --upgrade --flake .#kourosh";
-  clean = "sudo nix-collect-garbage -d";
-  cleanold = "sudo nix-collect-garbage --delete-old";
-  cleanboot = "sudo /run/current-system/bin/switch-to-configuration boot";
-};
-
-#systemd = {
-#  user.services.polkit-gnome-authentication-agent-1 = {
-#    description = "polkit-gnome-authentication-agent-1";
-#    wantedBy = [ "graphical-session.target" ];
-#    wants = [ "graphical-session.target" ];
-#    after = [ "graphical-session.target" ];
-#    serviceConfig = {
-#        Type = "simple";
-#        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-#        Restart = "on-failure";
-#        RestartSec = 1;
-#        TimeoutStopSec = 10;
-#      };
-#  };
-#};
-
 
   #fonts
     fonts.fonts = with pkgs; [
@@ -40,50 +10,7 @@ programs.bash.shellAliases = {
      (nerdfonts.override { fonts = [ "FiraCode" "JetBrainsMono" "Iosevka" ]; })
      ];
   #emojis
-    #services.gollum.emoji = true;
-
-
-#pci-passthroughnix
-
-#      pciPassthrough = {
-#    enable = true;
-#    pciIDs = "10de:1ba1,10de:10f0";
-#    cpuType = "intel";
-#    libvirtUsers = [ "sager" ];[
-#  };
-
-
-#VFIOnix
-
-#    specialisation."VFIO".configuration = {
-#  system.nixos.tags = [ "with-vfio" ];
-#  vfio.enable = true;
-#};
-
-
-#t.initrd.kernelModules = 
-#  "vfio_pci"
-#  "vfio"
-#  "vfio_iommu_type1"
-#  "vfio_virqfd"
-
-#  "nvidia"
-#  "nvidia_modeset"
-#  "nvidia_uvm"
-#  "nvidia_drm"
-#];
-
-
-  #Nix Virtualisation
-  #virtualisation.spiceUSBRedirection.enable = true;
-  #virtualisation.libvirtd.enable = true;
-  #virtualisation.libvirtd.qemu.ovmf.enable = true;
-  #virtualisation.libvirtd.qemu.swtpm.enable = true;
-  #environment.sessionVariables.LIBVIRT_DEFAULT_URI = [ "qemu:///system" ];
-
-
-
-
+    services.gollum.emoji = true;
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -101,10 +28,6 @@ programs.bash.shellAliases = {
 
   # Enable networking
   networking.networkmanager.enable = true;
-  
-  #Bluethooth
-  hardware.bluetooth.enable = true;
-  services.blueman.enable = true;
 
   # Set your time zone.
   time.timeZone = "Europe/Tallinn";
@@ -132,34 +55,6 @@ programs.bash.shellAliases = {
   services.xserver.displayManager.gdm.wayland = true;
   #services.xserver.displayManager.gdm.settings = {
   #};
-
-  # Gnome environment
-#  services.xserver.desktopManager.gnome.enable = true;
-#  environment.gnome.excludePackages = 
-#(with pkgs; [
-#  gnome-photos
-#  gnome-tour
-#]) ++ (with pkgs.gnome; [
-#  cheese # webcam tool
-#  gnome-music
-#  gnome-terminal
-#  gedit # text editor
-#  epiphany # web browser
-#  geary # email reader
-#  evince # document viewer
-#  gnome-characters
-#  totem # video player
-#  tali # poker game
-#  iagno # go game
-#  hitori # sudoku game
-#  atomix # puzzle game
-#  rygel
-#  yelp
-#  gnome-logs
-#  gnome-clocks
-#  gnome-contacts
-  
-#]);
   
   #services.xserver.displayManager.defaultSession = "hyprland";
   
@@ -183,11 +78,6 @@ programs.bash.shellAliases = {
     xkbVariant = "";
   };
 
-
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-
-
   # Enable sound with pipewire.
   sound.enable = true;
   hardware.pulseaudio.enable = false;
@@ -207,10 +97,6 @@ programs.bash.shellAliases = {
     # no need to redefine it in your config for now)
     #media-session.enable = true;
   };
-
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  services.xserver.libinput.enable = true;
 
   
   #xdg
@@ -299,24 +185,11 @@ programs.bash.shellAliases = {
   };
 
 
-#tlp
-services.tlp.enable = true;
-
-#upower dbus
-services.upower.enable = true;
-
 # Enable ZSH
 programs.zsh.enable = true;
 
 #starship
 programs.starship.enable = true;
-
-#swaylock pass verify
-security.pam.services.swaylock = {
-    text = ''
-      auth include login
-    '';
-  };
 
 #thunar dencies
 programs.thunar.plugins = with pkgs.xfce; [
@@ -336,25 +209,15 @@ programs.steam = {
   dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
 };
 
-
-
  # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-  
-  #Nvidia
-  services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.opengl.enable = true;
-  
-  #Cuda
-  services.xmr-stak.cudaSupport = true;
-  
-  # Optionally, you may need to select the appropriate driver version for your specific GPU.
-  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
-  
-  # nvidia-drm.modeset=1 is required for some wayland compositors, e.g. sway
-  hardware.nvidia.modesetting.enable = true;
 
-
+#swaylock pass verify
+security.pam.services.swaylock = {
+    text = ''
+      auth include login
+    '';
+  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -373,6 +236,65 @@ programs.steam = {
   ];
 
 
+###############################################  Still experimental  ###############################################
+
+#systemd = {
+#  user.services.polkit-gnome-authentication-agent-1 = {
+#    description = "polkit-gnome-authentication-agent-1";
+#    wantedBy = [ "graphical-session.target" ];
+#    wants = [ "graphical-session.target" ];
+#    after = [ "graphical-session.target" ];
+#    serviceConfig = {
+#        Type = "simple";
+#        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+#        Restart = "on-failure";
+#        RestartSec = 1;
+#        TimeoutStopSec = 10;
+#      };
+#  };
+#};
+
+
+#pci-passthroughnix
+
+#      pciPassthrough = {
+#    enable = true;
+#    pciIDs = "10de:1ba1,10de:10f0";
+#    cpuType = "intel";
+#    libvirtUsers = [ "sager" ];[
+#  };
+
+
+#VFIOnix
+
+#    specialisation."VFIO".configuration = {
+#  system.nixos.tags = [ "with-vfio" ];
+#  vfio.enable = true;
+#};
+
+
+#t.initrd.kernelModules = 
+#  "vfio_pci"
+#  "vfio"
+#  "vfio_iommu_type1"
+#  "vfio_virqfd"
+
+#  "nvidia"
+#  "nvidia_modeset"
+#  "nvidia_uvm"
+#  "nvidia_drm"
+#];
+
+
+  #Nix Virtualisation
+  #virtualisation.spiceUSBRedirection.enable = true;
+  #virtualisation.libvirtd.enable = true;
+  #virtualisation.libvirtd.qemu.ovmf.enable = true;
+  #virtualisation.libvirtd.qemu.swtpm.enable = true;
+  #environment.sessionVariables.LIBVIRT_DEFAULT_URI = [ "qemu:///system" ];
+
+###############################################  Still experimental  ###############################################
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -386,6 +308,35 @@ programs.steam = {
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
+
+  # Enable the Bluethooth daemon.
+  hardware.bluetooth.enable = true;
+  services.blueman.enable = true;
+
+  #Nvidia
+  services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.opengl.enable = true;
+  
+  #Cuda
+  services.xmr-stak.cudaSupport = true;
+  
+  # Optionally, you may need to select the appropriate driver version for your specific GPU.
+  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
+  
+  # nvidia-drm.modeset=1 is required for some wayland compositors, e.g. sway
+  hardware.nvidia.modesetting.enable = true;
+
+  # Enable CUPS to print documents.
+  services.printing.enable = true;
+
+  # Enable touchpad support (enabled default in most desktopManager).
+  services.xserver.libinput.enable = true;
+
+#tlp
+services.tlp.enable = true;
+
+#upower dbus
+services.upower.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

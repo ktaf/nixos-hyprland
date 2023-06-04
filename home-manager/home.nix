@@ -22,6 +22,30 @@
     vscode
     slack
     tdesktop
+		android-sdk
+		android-studio
+		anydesk-bin
+		ca-certificates-cacert
+		ca-certificates-vsign-universal-root
+		electron3-bin
+		esteidpkcs11loader
+		etcher-bin
+		flutter
+		flux-bin
+		jdk
+		jre
+		kind
+		krew-bin
+		libdigidocpp
+		libudfread-git
+		microsoft-edge-stable-bin
+		opencryptoki
+		qdigidoc4
+		remmina-plugin-anydesk-git
+		tfautomv
+		trousers
+		vdhcoapp
+		zoom
 
 		];
 
@@ -35,6 +59,11 @@
 		shellAliases = {
 			ll = "ls -la";
 			cat = "bat";
+			switch = "sudo nixos-rebuild switch --flake .#kourosh";
+			switchu = "sudo nixos-rebuild switch --upgrade --flake .#kourosh";
+			clean = "sudo nix-collect-garbage -d";
+			cleanold = "sudo nix-collect-garbage --delete-old";
+			cleanboot = "sudo /run/current-system/bin/switch-to-configuration boot";
 		};
 		oh-my-zsh = {
 			enable = true;

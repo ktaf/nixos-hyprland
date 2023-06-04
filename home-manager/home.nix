@@ -19,7 +19,6 @@
 		android-tools
 		anydesk
 		bat
-		electron_23
 		etcher
 		fluxcd
 		flutter

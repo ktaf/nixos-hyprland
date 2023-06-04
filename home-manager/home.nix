@@ -15,31 +15,32 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
   home.packages = with pkgs; [
-		bat
-		jq
-		tree
-		obsidian
-    vscode
-    slack
-    tdesktop
-		android-sdk
+		android-studio
+		android-tools
 		anydesk
+		bat
 		electron_23
 		etcher
-		flutter
 		fluxcd
+		flutter
 		jdk
+		jq
 		jre8
 		kind
 		krew
 		libdigidocpp
 		libudfread
 		microsoft-edge
+		obsidian
 		opencryptoki
 		qdigidoc
 		remmina
+		slack
+		tdesktop
 		tfautomv
 		trousers
+		tree
+		vscode
 		zoom
 
 		];

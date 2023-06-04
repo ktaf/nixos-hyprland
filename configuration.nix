@@ -244,8 +244,6 @@ programs.bash.shellAliases = {
     description = "Kourosh";
     extraGroups = [ "networkmanager" "wheel" "qemu-libvirtd" "libvirtd" "kvm" ];
     packages = with pkgs; [
-     google-chrome
-     firefox
      swaylock-effects swayidle wlogout swaybg  #Login etc..  
      waybar                                    #topbar 
      wayland-protocols
@@ -281,6 +279,8 @@ programs.bash.shellAliases = {
      #########System#########
      kitty
      zsh
+     google-chrome
+     firefox
      gnome.gnome-system-monitor
      libnotify
      poweralertd

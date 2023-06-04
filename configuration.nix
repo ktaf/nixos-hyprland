@@ -10,8 +10,8 @@
 
 
 programs.bash.shellAliases = {
-  switch = "sudo nixos-rebuild switch --flake .#nomad";
-  switchu = "sudo nixos-rebuild switch --upgrade --flake .#nomad";
+  switch = "sudo nixos-rebuild switch --flake .#kourosh";
+  switchu = "sudo nixos-rebuild switch --upgrade --flake .#kourosh";
   clean = "sudo nix-collect-garbage -d";
   cleanold = "sudo nix-collect-garbage --delete-old";
   cleanboot = "sudo /run/current-system/bin/switch-to-configuration boot";
@@ -244,8 +244,8 @@ programs.bash.shellAliases = {
     description = "Kourosh";
     extraGroups = [ "networkmanager" "wheel" "qemu-libvirtd" "libvirtd" "kvm" ];
     packages = with pkgs; [
-     neovim
-     google-chrome-beta
+     google-chrome
+     firefox
      swaylock-effects swayidle wlogout swaybg  #Login etc..  
      waybar                                    #topbar 
      wayland-protocols
@@ -269,7 +269,8 @@ programs.bash.shellAliases = {
      ffmpegthumbnailer                         #thumbnailer
      playerctl                                 #play,pause..
      pamixer                                   #mixer
-     brightnessctl                             #Brightness control
+     brightnessctl
+     neo-matrix                             #Brightness control
      ####GTK Customization####
      nordic
      papirus-icon-theme
@@ -280,6 +281,7 @@ programs.bash.shellAliases = {
      libcanberra-gtk3                          #notification sound
      #########System#########
      kitty
+     zsh
      gnome.gnome-system-monitor
      libnotify
      poweralertd
@@ -293,6 +295,9 @@ programs.bash.shellAliases = {
      curl
      #########################
     ];
+    # Enable ZSH
+    shell = pkgs.zsh;
+    programs.zsh.enable = true;
   };
 
 

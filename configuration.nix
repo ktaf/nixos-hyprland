@@ -197,6 +197,7 @@
      wofi
      xfce.xfce4-settings
      xdg-desktop-portal-hyprland
+     electron
      ####GTK Customization####
      nordic
      papirus-icon-theme

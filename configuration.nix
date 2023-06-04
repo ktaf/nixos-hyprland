@@ -269,8 +269,7 @@ programs.bash.shellAliases = {
      ffmpegthumbnailer                         #thumbnailer
      playerctl                                 #play,pause..
      pamixer                                   #mixer
-     brightnessctl
-     neo-matrix                             #Brightness control
+     brightnessctl                             #Brightness control
      ####GTK Customization####
      nordic
      papirus-icon-theme

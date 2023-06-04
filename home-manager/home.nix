@@ -23,6 +23,7 @@
 		etcher
 		fluxcd
 		flutter
+		fwupd
 		jdk
 		jq
 		jre8

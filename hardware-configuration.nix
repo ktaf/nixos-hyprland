@@ -14,13 +14,13 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/fb372b93-6ee3-4cdd-ada0-6a731164195d";
+    { device = "/dev/disk/by-label/NixOS";
       fsType = "btrfs";
       options = [ "subvol=@" ];
     };
 
   fileSystems."/boot/efi" =
-    { device = "/dev/disk/by-uuid/3633-E9BF";
+    { device = "/dev/disk/by-label/EFI";
       fsType = "vfat";
     };
 

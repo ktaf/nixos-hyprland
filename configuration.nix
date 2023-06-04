@@ -195,6 +195,8 @@ programs.starship.enable = true;
 programs.thunar.plugins = with pkgs.xfce; [
   thunar-archive-plugin
   thunar-volman
+  thunar-dropbox-plugin
+  thunar-media-tags-plugin
 ];
 services.gvfs.enable = true; 
 services.tumbler.enable = true;

@@ -154,6 +154,24 @@
      playerctl                                 #play,pause..
      pamixer                                   #mixer
      brightnessctl                             #Brightness control
+     wlr-randr
+     wayland
+     wayland-scanner
+     wayland-utils
+     egl-wayland
+     pkgs.xorg.xeyes
+     glfw-wayland
+     pkgs.qt6.qtwayland
+     wev    
+     alsa-lib
+     alsa-utils
+     flac
+     pulsemixer
+     linux-firmware
+     sshpass
+     pkgs.rust-bin.stable.latest.default
+     imagemagick
+     flameshot
      bluez
      blueman
      gnome.file-roller
@@ -163,11 +181,14 @@
      libva
      libsForQt5.qt5ct
      libsForQt5.sddm
-     linuxheaders
+     linuxHeaders
      lxappearance
      networkmanagerapplet
      noto-fonts-emoji
      nvidia-vaapi-driver
+     nvidia-offload
+     libva-utils
+     glxinfo
      polkit_gnome
      slurp
      swappy

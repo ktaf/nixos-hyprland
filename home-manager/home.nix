@@ -23,28 +23,23 @@
     slack
     tdesktop
 		android-sdk
-		android-studio
-		anydesk-bin
-		ca-certificates-cacert
-		ca-certificates-vsign-universal-root
-		electron3-bin
-		esteidpkcs11loader
-		etcher-bin
+		anydesk
+		electron_23
+		etcher
 		flutter
-		flux-bin
+		fluxcd
 		jdk
-		jre
+		jre8
 		kind
-		krew-bin
+		krew
 		libdigidocpp
-		libudfread-git
-		microsoft-edge-stable-bin
+		libudfread
+		microsoft-edge
 		opencryptoki
-		qdigidoc4
-		remmina-plugin-anydesk-git
+		qdigidoc
+		remmina
 		tfautomv
 		trousers
-		vdhcoapp
 		zoom
 
 		];

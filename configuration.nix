@@ -125,7 +125,7 @@
     '';
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.kourosh = {
+  users.users.${user} = {
     isNormalUser = true;
     description = "Kourosh";
     extraGroups = [ "networkmanager" "wheel" "qemu-libvirtd" "libvirtd" "kvm" ];
@@ -259,10 +259,13 @@ programs.steam = {
   nixpkgs.config.allowUnfree = true;
 
 #swaylock pass verify
-security.pam.services.swaylock = {
-    text = ''
-      auth include login
-    '';
+  security.pam.services.swaylock = { };
+  xdg.portal = {
+    enable = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-wlr
+    ];
+    wlr.enable = true;
   };
 
   # List packages installed in system profile. To search, run:
@@ -274,11 +277,6 @@ security.pam.services.swaylock = {
      wget
      git
      gh
-     #OVMFFull
-     #qemu
-     #libvirt
-     #kvmtool
-     #bridge-utils
   ];
 
 
@@ -359,10 +357,40 @@ security.pam.services.swaylock = {
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
 
-  #Nvidia
-  services.xserver.videoDrivers = [ "nvidia" ];
+#Nvidia
+  services.xserver = {
+    videoDrivers = [ "nvidia" ];
+
+    config = ''
+      Section "Device"
+          Identifier  "Intel Graphics"
+          Driver      "intel"
+          #Option      "AccelMethod"  "sna" # default
+          #Option      "AccelMethod"  "uxa" # fallback
+          Option      "TearFree"        "true"
+          Option      "SwapbuffersWait" "true"
+          BusID       "PCI:0:2:0"
+          #Option      "DRI" "2"             # DRI3 is now default
+      EndSection
+
+      Section "Device"
+          Identifier "nvidia"
+          Driver "nvidia"
+          BusID "PCI:1:0:0"
+          Option "AllowEmptyInitialConfiguration"
+      EndSection
+    '';
+    screenSection = ''
+      Option         "metamodes" "nvidia-auto-select +0+0 {ForceFullCompositionPipeline=On}"
+      Option         "AllowIndirectGLXProtocol" "off"
+      Option         "TripleBuffer" "on"
+    '';
+  };
+
   hardware.opengl.enable = true;
-  
+  hardware.nvidia.nvidiaSettings = true;
+  hardware.nvidia.powerManagement.enable = true;
+
   #Cuda
   services.xmr-stak.cudaSupport = true;
   
@@ -383,6 +411,10 @@ services.tlp.enable = true;
 
 #upower dbus
 services.upower.enable = true;
+powerManagement = {
+  enable = true;
+  cpuFreqGovernor = "ondemand";
+};
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

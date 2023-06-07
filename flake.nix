@@ -11,6 +11,7 @@
 
   outputs = { self, nixpkgs, hyprland, home-manager, ... }: 
     let
+      user = "kourosh";
       system = "x86_64-linux";
       pkgs = import nixpkgs {
        inherit system;
@@ -19,8 +20,9 @@
         lib = nixpkgs.lib;
     in {
         nixosConfigurations = {
-          kourosh = nixpkgs.lib.nixosSystem {
+          ${user} = nixpkgs.lib.nixosSystem {
               inherit system;
+              specialArgs = {inherit user;};
               modules = [ ./configuration.nix 
               hyprland.nixosModules.default
               {
@@ -32,7 +34,8 @@
               {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.kourosh = import ./home-manager/home.nix;
+              home-manager.extraSpecialArgs = {inherit user;};
+              home-manager.users.${user} = import ./home-manager/home.nix;
               }
 ];
             };

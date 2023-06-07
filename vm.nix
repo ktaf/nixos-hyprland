@@ -6,7 +6,7 @@
   programs.dconf.enable = true;
 
   # Add user to libvirtd group
-  users.users.kourosh.extraGroups = [ "libvirtd" ];
+  users.users.${user}.extraGroups = [ "libvirtd" ];
 
   # Install necessary packages
   environment.systemPackages = with pkgs; [

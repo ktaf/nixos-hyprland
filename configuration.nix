@@ -50,7 +50,7 @@
   # Enable the X11 windowing system.
     services.xserver.enable = true;
 
-  services.xserver.displayManager.defaultSession = "sddm";
+  services.xserver.displayManager.defaultSession = "hyprland";
   services.xserver.displayManager.sessionPackages = [ pkgs.hyprland ];
   
   #sddm

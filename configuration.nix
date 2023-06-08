@@ -48,22 +48,24 @@
   
 
   # Enable the X11 windowing system.
-  #services.xserver.enable = true;
+    services.xserver.enable = true;
 
-  # Enable Gnome login
-  # services.xserver.displayManager.gdm.enable = true;
-  # services.xserver.displayManager.gdm.wayland = true;
-  #services.xserver.displayManager.gdm.settings = {
-  #};
-  
+  services.xserver.displayManager.defaultSession = [ pkgs.hyprland ];
   services.xserver.displayManager.sessionPackages = [ pkgs.hyprland ];
   programs.xwayland.enable = lib.mkDefault true;
   
-  services.xserver.displayManager.defaultSession = "hyprland";
-  
-  
   #sddm
-  services.xserver.displayManager.sddm.enable = true;
+  services.xserver.displayManager.sddm = {
+    enable = true;
+    autoNumlock = true;
+    autoLogin.relogin = true;
+    theme = "elarun";
+    settings = {
+      Autologin = {
+        Session = "hyprland.desktop";
+        User = "${user}"
+    };
+    };
 
   #Flatpak
   services.flatpak.enable = true;

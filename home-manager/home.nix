@@ -61,7 +61,7 @@
 		MOZ_ENABLE_WAYLAND = "1";
 		SDL_VIDEODRIVER = "wayland";
 		_JAVA_AWT_WM_NONREPARENTING = "1";
-		QT_QPA_PLATFORM = "wayland";
+		QT_QPA_PLATFORM = "wayland-egl";
 		QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
 		QT_AUTO_SCREEN_SCALE_FACTOR = "1";
 		WLR_DRM_DEVICES = "/dev/dri/card1:/dev/dri/card0";
@@ -102,26 +102,26 @@
 			plugins = [ "git" "python" "docker" "history" "jsontools" "kubectl"];
 			theme = "dpoggi";
 		};
-		syntaxHighlighting = {
-			enable = true;
-		};
-		autosuggestions ={
-			enable = true;
-		};
-		setOptions = [
-			"correct"
-			"extendedglob"                                             # Extended globbing. Allows using regular expressions with *
-			"nocaseglob"                                               # Case insensitive globbing
-			"rcexpandparam"                                            # Array expension with parameters
-			"nocheckjobs"                                              # Don't warn about running processes when exiting
-			"numericglobsort"                                          # Sort filenames numerically when it makes sense
-			"nobeep"                                                   # No beep
-			"appendhistory"                                            # Immediately append history instead of overwriting
-			"histignorealldups"                                        # If a new command is a duplicate, remove the older one
-			"autocd"                                                   # if only directory path is entered, cd there.
-			"inc_append_history"                                       # save commands are added to the history immediately, otherwise only when shell exits.
-			"histignorespace"
-		];
+		# syntaxHighlighting = {
+		# 	enable = true;
+		# };
+		# autosuggestions = {
+		# 	enable = true;
+		# };
+		# setOptions = [
+		# 	"correct"
+		# 	"extendedglob"                                             # Extended globbing. Allows using regular expressions with *
+		# 	"nocaseglob"                                               # Case insensitive globbing
+		# 	"rcexpandparam"                                            # Array expension with parameters
+		# 	"nocheckjobs"                                              # Don't warn about running processes when exiting
+		# 	"numericglobsort"                                          # Sort filenames numerically when it makes sense
+		# 	"nobeep"                                                   # No beep
+		# 	"appendhistory"                                            # Immediately append history instead of overwriting
+		# 	"histignorealldups"                                        # If a new command is a duplicate, remove the older one
+		# 	"autocd"                                                   # if only directory path is entered, cd there.
+		# 	"inc_append_history"                                       # save commands are added to the history immediately, otherwise only when shell exits.
+		# 	"histignorespace"
+		# ];
 	};
 
 	programs.git = {

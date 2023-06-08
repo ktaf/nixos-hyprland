@@ -197,6 +197,9 @@
      wofi
      xfce.xfce4-settings
      xdg-desktop-portal-hyprland
+     xdg-desktop-portal-wlr
+     xdg-desktop-portal
+     xdg-desktop-portal-gtk
      electron
      ####GTK Customization####
      nordic

@@ -50,7 +50,6 @@
 	home.sessionVariables = {
 		EDITOR="code -w";
 		KUBE_EDITOR="code -w";
-		PATH="${PATH}:${HOME}/.krew/bin";
 		BROWSER = "google-chrome-stable";
 		TERMINAL = "kitty";
 		# GTK_IM_MODULE = "fcitx5";

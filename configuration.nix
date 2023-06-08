@@ -50,9 +50,8 @@
   # Enable the X11 windowing system.
     services.xserver.enable = true;
 
-  services.xserver.displayManager.defaultSession = [ pkgs.hyprland ];
+  services.xserver.displayManager.defaultSession = "sddm";
   services.xserver.displayManager.sessionPackages = [ pkgs.hyprland ];
-  programs.xwayland.enable = lib.mkDefault true;
   
   #sddm
   services.xserver.displayManager.sddm = {
@@ -63,9 +62,9 @@
     settings = {
       Autologin = {
         Session = "hyprland.desktop";
-        User = "${user}"
+        User = "${user}";
     };
-    };
+    };};
 
   #Flatpak
   services.flatpak.enable = true;
@@ -119,6 +118,8 @@
      waybar                                    #topbar 
      wayland-protocols
      libsForQt5.qt5.qtwayland
+     libsForQt5.plasma-wayland-protocols
+     qt6.qtwayland
      kanshi                                    #laptop dncies
      rofi mako rofimoji                        #Drawer + notifications
      jellyfin-ffmpeg                           #multimedia libs

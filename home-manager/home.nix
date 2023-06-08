@@ -54,6 +54,7 @@
 		# GTK_IM_MODULE = "fcitx5";
 		# QT_IM_MODULE = "fcitx5";
 		# XMODIFIERS = "@im=fcitx5";
+		NIXOS_OZONE_WL = "1";
 		QT_QPA_PLATFORMTHEME = "gtk3";
 		QT_SCALE_FACTOR = "1";
 		MOZ_ENABLE_WAYLAND = "1";

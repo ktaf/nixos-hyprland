@@ -26,9 +26,11 @@
               modules = [ ./configuration.nix 
               hyprland.nixosModules.default
               {
-              programs.hyprland.enable = true;
-              programs.hyprland.nvidiaPatches = true;
-              programs.hyprland.xwayland.enable = lib.mkDefault true;
+              programs.hyprland = {
+                enable = true;
+                nvidiaPatches = true;
+                xwayland.enable = lib.mkDefault true;
+              };
               }
               home-manager.nixosModules.home-manager
               {

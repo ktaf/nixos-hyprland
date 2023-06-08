@@ -51,16 +51,16 @@
   services.xserver.enable = true;
 
   # Enable Gnome login
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.displayManager.gdm.wayland = true;
+  # services.xserver.displayManager.gdm.enable = true;
+  # services.xserver.displayManager.gdm.wayland = true;
   #services.xserver.displayManager.gdm.settings = {
   #};
   
-  #services.xserver.displayManager.defaultSession = "hyprland";
+  services.xserver.displayManager.defaultSession = "hyprland";
   
   
   #sddm
-  #services.xserver.displayManager.sddm.enable = true;
+  services.xserver.displayManager.sddm.enable = true;
 
   #Flatpak
   services.flatpak.enable = true;

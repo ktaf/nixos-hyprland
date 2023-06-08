@@ -121,7 +121,7 @@
 			"histignorealldups"                                        # If a new command is a duplicate, remove the older one
 			"autocd"                                                   # if only directory path is entered, cd there.
 			"inc_append_history"                                       # save commands are added to the history immediately, otherwise only when shell exits.
-			"histignorespace 
+			"histignorespace"
 		];
 	};
 

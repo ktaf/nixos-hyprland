@@ -351,7 +351,14 @@ programs.steam = {
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  services.openssh.enable = true;
+
+
+ # Enable Firmware manager
+ services.fwupd = {
+  enable = true;
+  package = pkgs.fwupd;
+ };
 
   # Enable the Bluethooth daemon.
   hardware.bluetooth.enable = true;

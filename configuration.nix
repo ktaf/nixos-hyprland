@@ -48,13 +48,16 @@
   
 
   # Enable the X11 windowing system.
-  services.xserver.enable = true;
+  #services.xserver.enable = true;
 
   # Enable Gnome login
   # services.xserver.displayManager.gdm.enable = true;
   # services.xserver.displayManager.gdm.wayland = true;
   #services.xserver.displayManager.gdm.settings = {
   #};
+  
+  services.xserver.displayManager.sessionPackages = [ pkgs.hyprland ];
+  programs.xwayland.enable = lib.mkDefault true;
   
   services.xserver.displayManager.defaultSession = "hyprland";
   
@@ -66,11 +69,6 @@
   services.flatpak.enable = true;
   #locate
   services.locate.enable = true;
-
-  # Enable Xwayland
-  programs.xwayland.enable = true;             #enabled in flake
-  programs.hyprland.enable = true;             #enabled in flake.nix
-  programs.hyprland.nvidiaPatches = true;      #enabled in flake.nix
 
   # Configure keymap in X11
   services.xserver = {
@@ -97,21 +95,6 @@
     # no need to redefine it in your config for now)
     #media-session.enable = true;
   };
-
-  
-  #xdg
-  
-#  xdg.portal = {
-#  enable = true;
-#  extraPortals = with pkgs; [
-#    xdg-desktop-portal-wlr
-#  ];
-#  };
-
-#    wlr = {
-#    enable = true;
-#      };
-#    };
 
   environment.etc."xdg/user-dirs.defaults".text= ''
     DESKTOP=System/Desktop
@@ -249,7 +232,7 @@ services.gvfs.enable = true;
 services.tumbler.enable = true;
 
 #gnome outside gnome
-programs.dconf.enable = true;
+programs.dconf.enable = lib.mkDefault true;
 
 #Steam
 programs.steam = {
@@ -268,14 +251,33 @@ programs.steam = {
     extraPortals = with pkgs; [
       xdg-desktop-portal-wlr
     ];
-    wlr.enable = true;
   };
+  wlr = {
+    enable = true;
+  };
+
+
+  #xdg
+  
+#  xdg.portal = {
+#  enable = true;
+#  extraPortals = with pkgs; [
+#    xdg-desktop-portal-wlr
+#  ];
+#  };
+
+#    wlr = {
+#    enable = true;
+#      };
+#    };
+
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   environment.systemPackages = with pkgs; [
  # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+     hyprland
      vim
      wget
      git
@@ -397,7 +399,7 @@ programs.steam = {
     '';
   };
 
-  hardware.opengl.enable = true;
+  hardware.opengl.enable = lib.mkDefault true;
   hardware.nvidia.nvidiaSettings = true;
   hardware.nvidia.powerManagement.enable = true;
 

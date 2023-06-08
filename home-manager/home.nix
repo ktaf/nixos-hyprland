@@ -94,15 +94,15 @@
 		};
 		oh-my-zsh = {
 			enable = true;
-			plugins = [ "git" "python" "docker" ];
-			theme = "dpoggi";
+			plugins = [ "git" "zsh-autosuggestions" "zsh-syntax-highlighting" "python" "docker" ];
+			theme = "agnoster"; #"dpoggi"
 		};
 	};
 
 	programs.git = {
 			enable = true;
 			userName = "ktaf";
-			userEmail = "${user}taf@gmail.com";
+			userEmail = "kouroshtaf@gmail.com";
 			extraConfig = {
 				init.defaultBranch = "main";
 				core.editor = "code";

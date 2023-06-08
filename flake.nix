@@ -29,7 +29,10 @@
               programs.hyprland = {
                 enable = true;
                 nvidiaPatches = true;
-                xwayland.enable = lib.mkDefault true;
+                xwayland = {
+                  enable = lib.mkDefault true;
+                  hidpi = true;
+                };
               };
               }
               home-manager.nixosModules.home-manager

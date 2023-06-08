@@ -48,7 +48,9 @@
 
 
 	home.sessionVariables = {
-		EDITOR="code";
+		EDITOR="code -w";
+		KUBE_EDITOR="code -w";
+		PATH="${PATH}:${HOME}/.krew/bin";
 		BROWSER = "google-chrome-stable";
 		TERMINAL = "kitty";
 		# GTK_IM_MODULE = "fcitx5";
@@ -86,6 +88,10 @@
 		shellAliases = {
 			ll = "ls -la";
 			cat = "bat";
+		  k = "kubectl";
+      kx = "kubectx";
+      tf = "terraform";
+      rebase = "'git checkout master && git pull && git checkout - && git rebase master'";
 			switch = "sudo nixos-rebuild switch --flake .#${user}";
 			switchu = "sudo nixos-rebuild switch --upgrade --flake .#${user}";
 			clean = "sudo nix-collect-garbage -d";
@@ -94,9 +100,29 @@
 		};
 		oh-my-zsh = {
 			enable = true;
-			plugins = [ "git" "zsh-autosuggestions" "zsh-syntax-highlighting" "python" "docker" ];
-			theme = "agnoster"; #"dpoggi"
+			plugins = [ "git" "python" "docker" "history" "jsontools" "kubectl"];
+			theme = "dpoggi";
 		};
+		syntaxHighlighting = {
+			enable = true;
+		};
+		autosuggestions ={
+			enable = true;
+		};
+		setOptions = [
+			"correct"
+			"extendedglob"                                             # Extended globbing. Allows using regular expressions with *
+			"nocaseglob"                                               # Case insensitive globbing
+			"rcexpandparam"                                            # Array expension with parameters
+			"nocheckjobs"                                              # Don't warn about running processes when exiting
+			"numericglobsort"                                          # Sort filenames numerically when it makes sense
+			"nobeep"                                                   # No beep
+			"appendhistory"                                            # Immediately append history instead of overwriting
+			"histignorealldups"                                        # If a new command is a duplicate, remove the older one
+			"autocd"                                                   # if only directory path is entered, cd there.
+			"inc_append_history"                                       # save commands are added to the history immediately, otherwise only when shell exits.
+			"histignorespace 
+		];
 	};
 
 	programs.git = {

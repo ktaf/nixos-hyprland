@@ -82,13 +82,6 @@
 		XDG_DATA_HOME = "\${HOME}/.local/share";
 	};
 
-
- # Enable Firmware manager
- services.fwupd = {
-  enable = true;
-  package = pkgs.fwupd;
- };
-
 programs.git = {
 	enable = true;
 	userName = "ktaf";

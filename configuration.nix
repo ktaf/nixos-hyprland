@@ -144,6 +144,13 @@ powerManagement = {
   cpuFreqGovernor = "ondemand";
 };
 
+# Enable Firmware manager
+services.fwupd = {
+  enable = true;
+  package = pkgs.fwupd;
+};
+
+
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
     #For Chromecast from chrome

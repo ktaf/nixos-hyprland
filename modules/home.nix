@@ -46,7 +46,6 @@
 
 		];
 
-
 	home.sessionVariables = {
 		EDITOR="code -w";
 		KUBE_EDITOR="code -w";
@@ -72,10 +71,10 @@
 		LIBVA_DRIVER_NAME = "nvidia";
 		WLR_RENDERER = "vulkan";
 		__NV_PRIME_RENDER_OFFLOAD="1";
-
 		XDG_CURRENT_DESKTOP = "Hyprland";
 		XDG_SESSION_DESKTOP = "Hyprland";
 		XDG_SESSION_TYPE = "wayland";
+		GTK_USE_PORTAL = "1";
 		XDG_CACHE_HOME = "\${HOME}/.cache";
 		XDG_CONFIG_HOME = "\${HOME}/.config";
 		XDG_BIN_HOME = "\${HOME}/.local/bin";

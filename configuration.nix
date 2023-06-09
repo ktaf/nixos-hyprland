@@ -251,27 +251,15 @@ programs.steam = {
   security.pam.services.swaylock = { };
   xdg.portal = {
     enable = true;
+    gtkUsePortal = true;
     extraPortals = with pkgs; [
+      xdg-desktop-portal-hyprland
       xdg-desktop-portal-wlr
+      xdg-desktop-portal
+      xdg-desktop-portal-gtk
     ];
     wlr.enable = true;
   };
-
-
-  #xdg
-  
-#  xdg.portal = {
-#  enable = true;
-#  extraPortals = with pkgs; [
-#    xdg-desktop-portal-wlr
-#  ];
-#  };
-
-#    wlr = {
-#    enable = true;
-#      };
-#    };
-
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget

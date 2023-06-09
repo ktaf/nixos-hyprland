@@ -129,6 +129,13 @@ programs.steam = {
   dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
 };
 
+
+# Configure keymap in X11
+services.xserver = {
+  layout = "us";
+  xkbVariant = "";
+};
+
 # User etc/
 environment.etc."xdg/user-dirs.defaults".text= ''
   DESKTOP=System/Desktop

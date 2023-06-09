@@ -2,9 +2,10 @@
 {
   # Include the results of the hardware scan.
     imports = [ ./hardware-configuration.nix 
-    ./modules/vm.nix
     ./modules/shell.nix
-    ./modules/users.nix];
+    ./modules/users.nix
+    ./modules/nvidia.nix
+    ./modules/vm.nix];
 
   #fonts
     fonts.fonts = with pkgs; [
@@ -70,12 +71,6 @@
   #locate
   services.locate.enable = true;
 
-  # Configure keymap in X11
-  services.xserver = {
-    layout = "us";
-    xkbVariant = "";
-  };
-
   # Enable sound with pipewire.
   sound.enable = true;
   hardware.pulseaudio.enable = false;
@@ -124,78 +119,20 @@ xdg.portal = {
      gh
   ];
 
-  # List services that you want to enable:
+# List services that you want to enable:
 
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
+# Enable the OpenSSH daemon.
+services.openssh.enable = true;
 
+# Enable the Bluethooth daemon.
+hardware.bluetooth.enable = true;
+services.blueman.enable = true;
 
-  # Enable the Bluethooth daemon.
-  hardware.bluetooth.enable = true;
-  services.blueman.enable = true;
+# Enable CUPS to print documents.
+services.printing.enable = true;
 
-#Nvidia
-  services.xserver = {
-    videoDrivers = [ 
-  #Overlays
-
-  #Waybar wlr/Workspaces
-    nixpkgs.overlays = [
-    (self: super: {
-      waybar = super.waybar.overrideAttrs (oldAttrs: {
-        mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
-      });
-    })
-  ];
-}
-
-
-"nvidia" ];
-
-    config = ''
-      Section "Device"
-          Identifier  "Intel Graphics"
-          Driver      "intel"
-          #Option      "AccelMethod"  "sna" # default
-          #Option      "AccelMethod"  "uxa" # fallback
-          Option      "TearFree"        "true"
-          Option      "SwapbuffersWait" "true"
-          BusID       "PCI:0:2:0"
-          #Option      "DRI" "2"             # DRI3 is now default
-      EndSection
-
-      Section "Device"
-          Identifier "nvidia"
-          Driver "nvidia"
-          BusID "PCI:1:0:0"
-          Option "AllowEmptyInitialConfiguration"
-      EndSection
-    '';
-    screenSection = ''
-      Option         "metamodes" "nvidia-auto-select +0+0 {ForceFullCompositionPipeline=On}"
-      Option         "AllowIndirectGLXProtocol" "off"
-      Option         "TripleBuffer" "on"
-    '';
-  };
-
-  hardware.opengl.enable = lib.mkDefault true;
-  hardware.nvidia.nvidiaSettings = true;
-  hardware.nvidia.powerManagement.enable = true;
-
-  #Cuda
-  services.xmr-stak.cudaSupport = true;
-  
-  # Optionally, you may need to select the appropriate driver version for your specific GPU.
-  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
-  
-  # nvidia-drm.modeset=1 is required for some wayland compositors, e.g. sway
-  hardware.nvidia.modesetting.enable = true;
-
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  services.xserver.libinput.enable = true;
+# Enable touchpad support (enabled default in most desktopManager).
+services.xserver.libinput.enable = true;
 
 #tlp
 services.tlp.enable = true;

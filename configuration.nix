@@ -1,8 +1,10 @@
-{ config, pkgs, lib, inputs, user, ... }:
+{ config, pkgs, lib, inputs, user,  modulesPath, ... }:
 {
   # Include the results of the hardware scan.
     imports = [ ./hardware-configuration.nix 
-    ./vm.nix];
+    ./modules/vm.nix
+    ./modules/shell.nix
+    ./modules/users.nix];
 
   #fonts
     fonts.fonts = with pkgs; [
@@ -19,12 +21,6 @@
 
   # Define your hostname
   networking.hostName = "nixos";
-  # Enables wireless support via wpa_supplicant.
-  # networking.wireless.enable = true;  
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -66,6 +62,9 @@
     };
     };};
 
+#swaylock pass verify
+  security.pam.services.swaylock = { };
+
   #Flatpak
   services.flatpak.enable = true;
   #locate
@@ -97,169 +96,21 @@
     #media-session.enable = true;
   };
 
-  environment.etc."xdg/user-dirs.defaults".text= ''
-    DESKTOP=System/Desktop
-    DOWNLOAD=System/Downloads
-    TEMPLATES=System/Templates
-    PUBLICSHARE=System/Public
-    DOCUMENTS=System/Documents
-    MUSIC=Media/music
-    PICTURES=Media/photos
-    VIDEOS=Media/video 
-    '';
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.${user} = {
-    isNormalUser = true;
-    description = "Kourosh";
-    extraGroups = [ "networkmanager" "wheel" "qemu-libvirtd" "libvirtd" "kvm" ];
-    packages = with pkgs; [
-     swaylock-effects swayidle wlogout swaybg  #Login etc..  
-     waybar                                    #topbar 
-     wayland-protocols
-     libsForQt5.qt5.qtwayland
-     libsForQt5.plasma-wayland-protocols
-     qt6.qtwayland
-     kanshi                                    #laptop dncies
-     rofi mako rofimoji                        #Drawer + notifications
-     jellyfin-ffmpeg                           #multimedia libs
-     viewnior                                  #image viewr
-     pavucontrol                               #Volume control
-     xfce.thunar                               #filemanager
-     gnome-text-editor
-     gnome.file-roller
-     gnome.gnome-font-viewer
-     gnome.gnome-calculator
-     vlc                                       #Video player
-     amberol                                   #Music player
-     cava                                      #Sound Visualized
-     wl-clipboard                              
-     wf-recorder                               #Video recorder
-     sway-contrib.grimshot                     #Screenshot
-     ffmpegthumbnailer                         #thumbnailer
-     playerctl                                 #play,pause..
-     pamixer                                   #mixer
-     brightnessctl                             #Brightness control
-     wlr-randr
-     wayland
-     wayland-scanner
-     wayland-utils
-     egl-wayland
-     pkgs.xorg.xeyes
-     glfw-wayland
-     pkgs.qt6.qtwayland
-     wev    
-     alsa-lib
-     alsa-utils
-     flac
-     pulsemixer
-     linux-firmware
-     sshpass
-     rustc
-     imagemagick
-     flameshot
-     bluez
-     blueman
-     gnome.file-roller
-     grim
-     htop
-     intel-media-driver
-     jetbrains-mono
-     libva
-     libsForQt5.qt5ct
-     libsForQt5.sddm
-     linuxHeaders
-     lxappearance
-     networkmanagerapplet
-     noto-fonts-emoji
-     nvidia-vaapi-driver
-     libva-utils
-     glxinfo
-     polkit_gnome
-     slurp
-     swappy
-     swaycons
-     swww
-     wofi
-     xfce.xfce4-settings
-     xdg-desktop-portal-hyprland
-     xdg-desktop-portal-wlr
-     xdg-desktop-portal
-     xdg-desktop-portal-gtk
-     electron
-     ####GTK Customization####
-     nordic
-     papirus-icon-theme
-     gtk3
-     glib
-     xcur2png
-     rubyPackages.glib2
-     libcanberra-gtk3                          #notification sound
-     #########System#########
-     kitty
-     zsh
-     google-chrome
-     firefox
-     gnome.gnome-system-monitor
-     libnotify
-     poweralertd
-     dbus
-     #gsettings-desktop-schemas
-     #wrapGAppsHook
-     #xdg-desktop-portal-hyprland
-     ####photoshop dencies####
-     gnome.zenity
-     wine64Packages.waylandFull
-     curl
-     #########################
-    ];
-    # SHELL ZSH
-    shell = pkgs.zsh;
-  };
-
-
-# Enable ZSH
-programs.zsh.enable = true;
-
-#starship
-programs.starship.enable = true;
-
-#thunar dencies
-programs.thunar.plugins = with pkgs.xfce; [
-  thunar-archive-plugin
-  thunar-volman
-  thunar-dropbox-plugin
-  thunar-media-tags-plugin
-];
-services.gvfs.enable = true; 
-services.tumbler.enable = true;
-
-#gnome outside gnome
-programs.dconf.enable = lib.mkDefault true;
-
-#Steam
-programs.steam = {
-  enable = true;
-  remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-  dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-};
-
  # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-#swaylock pass verify
-  security.pam.services.swaylock = { };
-  xdg.portal = {
-    enable = true;
-    gtkUsePortal = true;
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-hyprland
-      xdg-desktop-portal-wlr
-      xdg-desktop-portal
-      xdg-desktop-portal-gtk
-    ];
-    wlr.enable = true;
-  };
+# XDG Configuration
+xdg.portal = {
+  enable = true;
+  gtkUsePortal = true;
+  extraPortals = with pkgs; [
+    xdg-desktop-portal-hyprland
+    xdg-desktop-portal-wlr
+    xdg-desktop-portal
+    xdg-desktop-portal-gtk
+  ];
+  wlr.enable = true;
+};
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -273,86 +124,11 @@ programs.steam = {
      gh
   ];
 
-
-###############################################  Still experimental  ###############################################
-
-#systemd = {
-#  user.services.polkit-gnome-authentication-agent-1 = {
-#    description = "polkit-gnome-authentication-agent-1";
-#    wantedBy = [ "graphical-session.target" ];
-#    wants = [ "graphical-session.target" ];
-#    after = [ "graphical-session.target" ];
-#    serviceConfig = {
-#        Type = "simple";
-#        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-#        Restart = "on-failure";
-#        RestartSec = 1;
-#        TimeoutStopSec = 10;
-#      };
-#  };
-#};
-
-
-#pci-passthroughnix
-
-#      pciPassthrough = {
-#    enable = true;
-#    pciIDs = "10de:1ba1,10de:10f0";
-#    cpuType = "intel";
-#    libvirtUsers = [ "sager" ];[
-#  };
-
-
-#VFIOnix
-
-#    specialisation."VFIO".configuration = {
-#  system.nixos.tags = [ "with-vfio" ];
-#  vfio.enable = true;
-#};
-
-
-#t.initrd.kernelModules = 
-#  "vfio_pci"
-#  "vfio"
-#  "vfio_iommu_type1"
-#  "vfio_virqfd"
-
-#  "nvidia"
-#  "nvidia_modeset"
-#  "nvidia_uvm"
-#  "nvidia_drm"
-#];
-
-
-  #Nix Virtualisation
-  #virtualisation.spiceUSBRedirection.enable = true;
-  #virtualisation.libvirtd.enable = true;
-  #virtualisation.libvirtd.qemu.ovmf.enable = true;
-  #virtualisation.libvirtd.qemu.swtpm.enable = true;
-  #environment.sessionVariables.LIBVIRT_DEFAULT_URI = [ "qemu:///system" ];
-
-###############################################  Still experimental  ###############################################
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
-
- # Enable Firmware manager
- services.fwupd = {
-  enable = true;
-  package = pkgs.fwupd;
- };
 
   # Enable the Bluethooth daemon.
   hardware.bluetooth.enable = true;
@@ -360,7 +136,21 @@ programs.steam = {
 
 #Nvidia
   services.xserver = {
-    videoDrivers = [ "nvidia" ];
+    videoDrivers = [ 
+  #Overlays
+
+  #Waybar wlr/Workspaces
+    nixpkgs.overlays = [
+    (self: super: {
+      waybar = super.waybar.overrideAttrs (oldAttrs: {
+        mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
+      });
+    })
+  ];
+}
+
+
+"nvidia" ];
 
     config = ''
       Section "Device"
@@ -431,18 +221,4 @@ powerManagement = {
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.05"; # Did you read the comment?
-
-
-  #Overlays
-
-  #Waybar wlr/Workspaces
-    nixpkgs.overlays = [
-    (self: super: {
-      waybar = super.waybar.overrideAttrs (oldAttrs: {
-        mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
-      });
-    })
-  ];
 }
-
-

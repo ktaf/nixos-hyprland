@@ -1,8 +1,8 @@
-{ config, pkgs, lib, inputs, ... }:
+{ config, pkgs, lib, inputs, user, ... }:
 {
 
 services.xserver = {
-  videoDrivers = [ "nvidia" ];
+  videoDrivers = [ "modesetting" "nvidia" ];
 
   config = ''
     Section "Device"
@@ -30,15 +30,20 @@ services.xserver = {
   '';
 };
 
-hardware.opengl.enable = lib.mkDefault true;
-hardware.nvidia.nvidiaSettings = true;
-hardware.nvidia.powerManagement.enable = true;
-# Optionally, you may need to select the appropriate driver version for your specific GPU.
-hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
-# nvidia-drm.modeset=1 is required for some wayland compositors, e.g. sway
-hardware.nvidia.modesetting.enable = true;
+  hardware.opengl.enable = true;
+  hardware.opengl.driSupport = true;
+  hardware.opengl.driSupport32Bit = true;
+  hardware.nvidia.nvidiaSettings = true;
+  hardware.nvidia.powerManagement.enable = true;
+  #hardware.nvidia.forceFullCompositionPipeline = true;
 
-#Cuda
-services.xmr-stak.cudaSupport = true;
+  # Cuda
+  services.xmr-stak.cudaSupport = true; 
+  # Optionally, you may need to select the appropriate driver version for your specific GPU.
+  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
+  # nvidia-drm.modeset=1 is required for some wayland compositors, e.g. sway
+  hardware.nvidia.modesetting.enable = true;
+  #Switch GPU
+  services.switcherooControl.enable = true;
 
 }

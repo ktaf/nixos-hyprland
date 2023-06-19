@@ -3,111 +3,126 @@
 {
 
 # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.${user} = {
-    isNormalUser = true;
-    description = "Kourosh";
-    extraGroups = [ "networkmanager" "wheel" "qemu-libvirtd" "libvirtd" "kvm" ];
-    packages = with pkgs; [
-     swaylock-effects swayidle wlogout swaybg  #Login etc..  
-     waybar                                    #topbar 
-     wayland-protocols
-     libsForQt5.qt5.qtwayland
-     libsForQt5.plasma-wayland-protocols
-     qt6.qtwayland
-     kanshi                                    #laptop dncies
-     rofi mako rofimoji                        #Drawer + notifications
-     jellyfin-ffmpeg                           #multimedia libs
-     viewnior                                  #image viewr
-     pavucontrol                               #Volume control
-     xfce.thunar                               #filemanager
-     gnome-text-editor
-     gnome.file-roller
-     gnome.gnome-font-viewer
-     gnome.gnome-calculator
-     vlc                                       #Video player
-     amberol                                   #Music player
-     cava                                      #Sound Visualized
-     wl-clipboard                              
-     wf-recorder                               #Video recorder
-     sway-contrib.grimshot                     #Screenshot
-     ffmpegthumbnailer                         #thumbnailer
-     playerctl                                 #play,pause..
-     pamixer                                   #mixer
-     brightnessctl                             #Brightness control
-     wlr-randr
-     wayland
-     wayland-scanner
-     wayland-utils
-     egl-wayland
-     pkgs.xorg.xeyes
-     glfw-wayland
-     pkgs.qt6.qtwayland
-     wev    
-     alsa-lib
-     alsa-utils
-     flac
-     pulsemixer
-     linux-firmware
-     sshpass
-     rustc
-     imagemagick
-     flameshot
-     bluez
-     blueman
-     gnome.file-roller
-     grim
-     htop
-     intel-media-driver
-     jetbrains-mono
-     libva
-     libsForQt5.qt5ct
-     libsForQt5.sddm
-     linuxHeaders
-     lxappearance
-     networkmanagerapplet
-     noto-fonts-emoji
-     nvidia-vaapi-driver
-     libva-utils
-     glxinfo
-     polkit_gnome
-     slurp
-     swappy
-     swaycons
-     swww
-     wofi
-     xfce.xfce4-settings
-     xdg-desktop-portal-hyprland
-     xdg-desktop-portal-wlr
-     xdg-desktop-portal
-     xdg-desktop-portal-gtk
-     electron
-     ####GTK Customization####
-     nordic
-     papirus-icon-theme
-     gtk3
-     glib
-     xcur2png
-     rubyPackages.glib2
-     libcanberra-gtk3                          #notification sound
-     #########System#########
-     kitty
-     zsh
-     google-chrome
-     firefox
-     gnome.gnome-system-monitor
-     libnotify
-     poweralertd
-     dbus
-     #gsettings-desktop-schemas
-     #wrapGAppsHook
-     #xdg-desktop-portal-hyprland
-     ####photoshop dencies####
-     gnome.zenity
-     wine64Packages.waylandFull
-     curl
-     #########################
-    ];
-  };
+users.users.${user} = {
+  isNormalUser = true;
+  description = "Kourosh";
+  extraGroups = [ "networkmanager" "wheel" "qemu-libvirtd" "libvirtd" "kvm" "wheel" "disk" "docker" "audio" "video" "input" "systemd-journal" "network" "davfs2" ];
+  packages = with pkgs; [
+    waybar                                    #topbar 
+    wayland-protocols
+    libsForQt5.qt5.qtwayland
+    libsForQt5.plasma-wayland-protocols
+    qt6.qtwayland
+    kanshi                                    #laptop dncies
+    rofi mako rofimoji                        #Drawer + notifications
+    jellyfin-ffmpeg                           #multimedia libs
+    viewnior                                  #image viewr
+    pavucontrol                               #Volume control
+    xfce.thunar                               #filemanager
+    gnome-text-editor
+    gnome.file-roller
+    gnome.gnome-font-viewer
+    gnome.gnome-calculator
+    vlc                                       #Video player
+    amberol                                   #Music player
+    cava                                      #Sound Visualized
+    wf-recorder                               #Video recorder
+    sway-contrib.grimshot                     #Screenshot
+    ffmpegthumbnailer                         #thumbnailer
+    playerctl                                 #play,pause..
+    pamixer                                   #mixer
+    brightnessctl                             #Brightness control
+    wlr-randr
+    wayland
+    wayland-scanner
+    wayland-utils
+    egl-wayland
+    pkgs.xorg.xeyes
+    glfw-wayland
+    pkgs.qt6.qtwayland
+    wev    
+    alsa-lib
+    alsa-utils
+    flac
+    pulsemixer
+    linux-firmware
+    sshpass
+    rustc
+    imagemagick
+    flameshot
+    bluez
+    blueman
+    gnome.file-roller
+    htop
+    intel-media-driver
+    jetbrains-mono
+    libva
+    libsForQt5.qt5ct
+    libsForQt5.sddm
+    linuxHeaders
+    lxappearance
+    networkmanagerapplet
+    noto-fonts-emoji
+    nvidia-vaapi-driver
+    libva-utils
+    glxinfo
+    polkit_gnome
+    wofi
+    xfce.xfce4-settings
+    xdg-desktop-portal-hyprland
+    xdg-desktop-portal-wlr
+    xdg-desktop-portal
+    xdg-desktop-portal-gtk
+    electron
+    configure-gtk
+    wayland
+    xdg-utils # for opening default programs when clicking links
+    gnome3.adwaita-icon-theme  # default gnome cursors
+    grim # screenshot functionality
+    slurp # screenshot functionality
+    wl-clipboard # wl-copy and wl-paste for copy/paste from stdin / stdout
+    wdisplays # tool to configure displays
+    ####GTK Customization####
+    nordic
+    papirus-icon-theme
+    gtk3
+    glib # gsettings
+    xcur2png
+    rubyPackages.glib2
+    libcanberra-gtk3                          #notification sound
+    dracula-theme # gtk theme
+    #########Login#########
+    swaylock
+    swaylock-effects
+    swayidle
+    swappy
+    swaycons
+    swww
+    wlogout
+    swaybg    
+    #########System#########
+    kitty
+    zsh
+    google-chrome
+    firefox
+    gnome.gnome-system-monitor
+    libnotify
+    poweralertd
+    dbus
+    #gsettings-desktop-schemas
+    #wrapGAppsHook
+    #xdg-desktop-portal-hyprland
+    ####photoshop dencies####
+    gnome.zenity
+    wine64Packages.waylandFull
+    curl
+    #########################
+  ];
+};
+
+
+# QT
+programs.qt5ct.enable = true;
 
 #thunar dencies
 programs.thunar.plugins = with pkgs.xfce; [

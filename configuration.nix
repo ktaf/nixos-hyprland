@@ -45,7 +45,7 @@
   
 
   # Enable the X11 windowing system.
-    services.xserver.enable = true;
+  services.xserver.enable = true;
 
   services.xserver.displayManager.defaultSession = "hyprland";
   services.xserver.displayManager.sessionPackages = [ pkgs.hyprland ];
@@ -94,6 +94,7 @@
  # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+services.dbus.enable = true;
 # XDG Configuration
 xdg.portal = {
   enable = true;

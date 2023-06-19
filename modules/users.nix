@@ -37,9 +37,8 @@ users.users.${user} = {
     wayland-scanner
     wayland-utils
     egl-wayland
-    pkgs.xorg.xeyes
+    xorg.xeyes
     glfw-wayland
-    pkgs.qt6.qtwayland
     wev    
     alsa-lib
     alsa-utils
@@ -74,7 +73,6 @@ users.users.${user} = {
     xdg-desktop-portal
     xdg-desktop-portal-gtk
     electron
-    configure-gtk
     wayland
     xdg-utils # for opening default programs when clicking links
     gnome3.adwaita-icon-theme  # default gnome cursors
@@ -122,7 +120,10 @@ users.users.${user} = {
 
 
 # QT
-programs.qt5ct.enable = true;
+qt = {
+  enable = true;
+  platformTheme = "qt5ct";
+};
 
 #thunar dencies
 programs.thunar.plugins = with pkgs.xfce; [

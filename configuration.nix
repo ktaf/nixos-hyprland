@@ -159,7 +159,6 @@ services.fwupd = {
   # Or disable the firewall altogether.
    networking.firewall.enable = false;
 
-  system.copySystemConfiguration = true;
   system.autoUpgrade.enable = true;  
   system.autoUpgrade.allowReboot = true; 
   system.autoUpgrade.channel = "https://channels.nixos.org/nixos-23.05";

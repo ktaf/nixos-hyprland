@@ -12,6 +12,9 @@ inputs = {
     inputs.nixpkgs.follows = "nixpkgs";
   };
   nur.url = "github:nix-community/NUR";
+  hyprpicker.url = "github:hyprwm/hyprpicker";
+  hypr-contrib.url = "github:hyprwm/contrib";
+  flake-parts.url = "github:hercules-ci/flake-parts";
   treefmt-nix.url = "github:numtide/treefmt-nix";
   };
 

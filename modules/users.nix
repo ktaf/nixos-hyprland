@@ -8,6 +8,7 @@ users.users.${user} = {
   description = "Kourosh";
   extraGroups = [ "networkmanager" "wheel" "qemu-libvirtd" "libvirtd" "kvm" "wheel" "disk" "docker" "audio" "video" "input" "systemd-journal" "network" "davfs2" ];
   packages = with pkgs; [
+    auto-cpufreq
     waybar                                    #topbar 
     wayland-protocols
     libsForQt5.qt5.qtwayland
@@ -136,7 +137,7 @@ services.gvfs.enable = true;
 services.tumbler.enable = true;
 
 #gnome outside gnome
-programs.dconf.enable = lib.mkDefault true;
+programs.dconf.enable = true;
 
 #Steam
 programs.steam = {
@@ -148,8 +149,9 @@ programs.steam = {
 
 # Configure keymap in X11
 services.xserver = {
-  layout = "us";
-  xkbVariant = "";
+  layout = "us,ir";
+  xkbVariant = "latitude";
+  xkbOptions = "grp:alt_shift_toggle";
 };
 
 # User etc/

@@ -8,14 +8,14 @@ inputs = {
     inputs.nixpkgs.follows = "nixpkgs";
   };
   home-manager = {
-    url = "github:nix-community/home-managerrelease-23.05";
+    url = "github:nix-community/home-manager/release-23.05";
     inputs.nixpkgs.follows = "nixpkgs";
   };
   treefmt-nix.url = "github:numtide/treefmt-nix";
   };
 
 
-outputs = { self, nixpkgs, hyprland, home-manager, treefmt-nix, ... }: 
+outputs = inputs @ { self, nixpkgs, hyprland, home-manager, treefmt-nix, ... }: 
   let
     user = "kourosh";
     system = "x86_64-linux";
@@ -51,7 +51,7 @@ outputs = { self, nixpkgs, hyprland, home-manager, treefmt-nix, ... }:
             ];
           };
         };
-    flake-parts.lib.mkFlake { inherit inputs; } {
+    flake-parts.lib.mkFlake = { inherit inputs; } {
       systems = [ "x86_64-linux" ];
       imports = [
         inputs.flake-root.flakeModule
@@ -69,7 +69,6 @@ outputs = { self, nixpkgs, hyprland, home-manager, treefmt-nix, ... }:
         in
         {
           treefmt.config = {
-            inherit (config.flake-root) projectRootFile;
             package = pkgs.treefmt;
             programs.nixpkgs-fmt.enable = true;
             programs.prettier.enable = true;
@@ -80,7 +79,6 @@ outputs = { self, nixpkgs, hyprland, home-manager, treefmt-nix, ... }:
               indent_size = 4;
             };
             projectRootFile = "flake.nix";
-            programs.nixpkgs-fmt.enable = true;
             # Here you can specify the formatters to use
             programs.terraform.enable = true;
             # ...and options

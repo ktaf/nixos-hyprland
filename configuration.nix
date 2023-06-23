@@ -138,6 +138,9 @@ services.xserver.libinput.enable = true;
 #tlp
 services.tlp.enable = true;
 
+#auto-cpufreq
+services.auto-cpufreq.enable = true;
+
 #upower dbus
 services.upower.enable = true;
 powerManagement = {

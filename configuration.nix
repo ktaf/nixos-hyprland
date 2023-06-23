@@ -5,6 +5,7 @@
     ./modules/shell.nix
     ./modules/users.nix
     ./modules/nvidia.nix
+    ./modules/gaming.nix
     ./modules/vm.nix];
 
   #fonts
@@ -157,7 +158,7 @@ services.fwupd = {
 #    networking.firewall.allowedUDPPortRanges = [ { from = 32768; to = 60999; } ];
   # Or disable the firewall altogether.
    networking.firewall.enable = false;
-   
+
   system.copySystemConfiguration = true;
   system.autoUpgrade.enable = true;  
   system.autoUpgrade.allowReboot = true; 

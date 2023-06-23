@@ -157,6 +157,10 @@ services.fwupd = {
 #    networking.firewall.allowedUDPPortRanges = [ { from = 32768; to = 60999; } ];
   # Or disable the firewall altogether.
    networking.firewall.enable = false;
-
+   
+  system.copySystemConfiguration = true;
+  system.autoUpgrade.enable = true;  
+  system.autoUpgrade.allowReboot = true; 
+  system.autoUpgrade.channel = "https://channels.nixos.org/nixos-23.05";
   system.stateVersion = "23.05"; # Did you read the comment?
 }

@@ -150,7 +150,7 @@ programs.steam = {
 services.xserver = {
   layout = "us,ir";
   xkbVariant = "latitude";
-  xkbOptions = "grp:alt_shift_toggle"
+  xkbOptions = "grp:alt_shift_toggle";
 };
 
 # User etc/

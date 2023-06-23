@@ -148,8 +148,9 @@ programs.steam = {
 
 # Configure keymap in X11
 services.xserver = {
-  layout = "us";
-  xkbVariant = "";
+  layout = "us,ir";
+  xkbVariant = "latitude";
+  xkbOptions = "grp:alt_shift_toggle"
 };
 
 # User etc/

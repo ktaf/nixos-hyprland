@@ -142,11 +142,11 @@ services.tlp.enable = true;
 services.auto-cpufreq.enable = true;
 
 #upower dbus
-services.upower.enable = true;
-powerManagement = {
-  enable = true;
-  cpuFreqGovernor = "ondemand";
-};
+# services.upower.enable = true;
+# powerManagement = {
+#   enable = true;
+#   cpuFreqGovernor = "ondemand";
+# };
 
 # Enable Firmware manager
 services.fwupd = {

@@ -15,7 +15,7 @@ systemd.user = {
 			};
 	    sway-session.Unit.Wants = [ "xdg-desktop-autostart.target" ];
 		};
-
+};
 nixpkgs = {
 	config = {
 		allowUnfree = true;

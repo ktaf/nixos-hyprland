@@ -6,13 +6,19 @@ home.homeDirectory = "/home/${user}";
 home.stateVersion = "23.05";
 
 systemd.user = {
-	targets.sway-session.Unit.Wants = [ "xdg-desktop-autostart.target" ];
-};
+	targets = {
+		tray = {  # Tray.target can not be found when xsession is not enabled. This fixes the issue.
+			Unit = {
+				Description = "Home Manager System Tray";
+				Requires = [ "graphical-session-pre.target" ];
+			};
+			};
+	    sway-session.Unit.Wants = [ "xdg-desktop-autostart.target" ];
+		};
 
 nixpkgs = {
 	config = {
 		allowUnfree = true;
-		allowUnfreePredicate = (_: true);
 	};
 };
 

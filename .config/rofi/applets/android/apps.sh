@@ -66,12 +66,10 @@ case $chosen in
 		fi
         ;;
     $browser)
-		if [[ -f /usr/bin/firefox ]]; then
-			firefox &
-		elif [[ -f /usr/bin/chromium ]]; then
+		if [[ -f /usr/bin/google-chrome-stable]]; then
 			chromium &
-		elif [[ -f /usr/bin/midori ]]; then
-			midori &
+		elif [[ -f /usr/bin/firefox ]]; then
+			firefox &
 		else
 			msg "No suitable web browser found!"
 		fi

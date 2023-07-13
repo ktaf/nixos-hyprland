@@ -71,7 +71,6 @@ users.users.${user} = {
     polkit_gnome
     wofi
     xfce.xfce4-settings
-    xdg-desktop-portal-wlr
     xdg-desktop-portal
     xdg-desktop-portal-gtk
     electron
@@ -90,7 +89,6 @@ users.users.${user} = {
     xcur2png
     rubyPackages.glib2
     libcanberra-gtk3                          #notification sound
-    dracula-theme # gtk theme
     #########Login#########
     swaylock
     swaylock-effects
@@ -124,7 +122,8 @@ users.users.${user} = {
 # QT
 qt = {
   enable = true;
-  platformTheme = "qt5ct";
+  style = "gtk2";
+  platformTheme = "gtk2";
 };
 
 #thunar dencies

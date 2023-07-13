@@ -15,10 +15,9 @@ inputs = {
   hyprpicker.url = "github:hyprwm/hyprpicker";
   hypr-contrib.url = "github:hyprwm/contrib";
   flake-parts.url = "github:hercules-ci/flake-parts";
-  treefmt-nix.url = "github:numtide/treefmt-nix";
+  # used for development
+  treefmt-nix = { url = "github:numtide/treefmt-nix"; inputs.nixpkgs.follows = "nixpkgs"; };
   };
-
-
 outputs = inputs @ { self, nixpkgs, hyprland, home-manager, treefmt-nix, ... }: 
   let
     user = "kourosh";
@@ -62,34 +61,28 @@ outputs = inputs @ { self, nixpkgs, hyprland, home-manager, treefmt-nix, ... }:
         inputs.mission-control.flakeModule
         inputs.treefmt-nix.flakeModule
       ];
-      perSystem = { config, inputs', pkgs, system, lib, ... }:
-        let
-          pkgs = import nixpkgs {
-            inherit system;
-            overlays = [
-              self.overlays.default
-            ];
-          };
-        in
-        {
-          treefmt.config = {
-            package = pkgs.treefmt;
-            programs.nixpkgs-fmt.enable = true;
-            programs.prettier.enable = true;
-            programs.taplo.enable = true;
-            programs.stylua.enable = true;
-            programs.beautysh = {
+      perSystem = { config, ... }: {
+        treefmt = {
+          projectRootFile = "flake.nix";
+          programs.mdsh.enable = true;
+          programs.nixpkgs-fmt.enable = true;
+          programs.shellcheck.enable = true;
+          programs.shfmt.enable = true;
+          programs.prettier.enable = true;
+          settings.formatter.prettier.options = [ "--prose-wrap" "always" ];
+          settings.formatter.shellcheck.options = [ "-s" "bash" ];
+          programs.beautysh = {
               enable = true;
               indent_size = 4;
-            };
-            projectRootFile = "flake.nix";
-            # Here you can specify the formatters to use
-            programs.terraform.enable = true;
-            # ...and options
-            programs.terraform.package = nixpkgs.terraform_1;
           };
-      };}; 
+          # Here you can specify the formatters to use
+          programs.terraform.enable = true;
+          # ...and options
+          programs.terraform.package = nixpkgs.terraform_1;
+        };
+        formatter = config.treefmt.build.wrapper;
       };
+      };}; 
 }
 
 #nixos-23.05

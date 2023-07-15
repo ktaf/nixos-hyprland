@@ -92,11 +92,7 @@ services.dbus.enable = true;
 # XDG Configuration
 xdg.portal = {
   enable = true;
-  extraPortals = with pkgs; [
-    xdg-desktop-portal
-    xdg-desktop-portal-gtk
-  ];
-  # wlr.enable = true;
+  wlr.enable = true;
 };
 
   # List packages installed in system profile. To search, run:

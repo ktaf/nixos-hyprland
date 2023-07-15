@@ -48,9 +48,14 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-  services.xserver.displayManager.defaultSession = "hyprland";
-  services.xserver.displayManager.sessionPackages = [ pkgs.hyprland ];
+  # services.xserver.displayManager.defaultSession = "hyprland";
+  # services.xserver.displayManager.sessionPackages = [ pkgs.hyprland ];
+  services.xserver.windowManager.hypr.enable = true;
   
+  services.xserver.displayManager.sessionCommands = ''
+    xscreensaver -no-splash &
+  '';
+
   #sddm
   services.xserver.displayManager.sddm = {
     enable = true;
@@ -138,6 +143,9 @@ services.tlp.enable = true;
 
 #auto-cpufreq
 services.auto-cpufreq.enable = true;
+
+#auto-lock
+services.physlock.enable = true;
 
 #upower dbus
 # services.upower.enable = true;

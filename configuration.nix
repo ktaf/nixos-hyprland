@@ -48,26 +48,14 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-  # services.xserver.displayManager.defaultSession = "hyprland";
-  # services.xserver.displayManager.sessionPackages = [ pkgs.hyprland ];
-  services.xserver.windowManager.hypr.enable = true;
-  
-  services.xserver.displayManager.sessionCommands = ''
-    xscreensaver -no-splash &
-  '';
 
-  #sddm
-  services.xserver.displayManager.sddm = {
-    enable = true;
-    autoNumlock = true;
-    autoLogin.relogin = true;
-    theme = "elarun";
-    settings = {
-      Autologin = {
-        Session = "hyprland.desktop";
-        User = "${user}";
-    };
-    };};
+  services.xserver.windowManager.hypr.enable = true;
+  services.xserver.displayManager.defaultSession = "hyprland";
+  services.xserver.displayManager.sessionPackages = [ pkgs.hyprland ];
+
+
+  #lightdm works but need fixes
+  #services.xserver.displayManager.lightdm.enable = true;
 
 #swaylock pass verify
   security.pam.services.swaylock = { };
@@ -108,7 +96,7 @@ xdg.portal = {
     xdg-desktop-portal
     xdg-desktop-portal-gtk
   ];
-  wlr.enable = true;
+  # wlr.enable = true;
 };
 
   # List packages installed in system profile. To search, run:
@@ -116,7 +104,6 @@ xdg.portal = {
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   environment.systemPackages = with pkgs; [
  # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-     hyprland
      vim
      wget
      git
